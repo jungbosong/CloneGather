@@ -53,8 +53,8 @@ public class UI_SettingCharacter : UI_Popup
         BindImage(typeof(Images));
         BindButton(typeof(Buttons));
 
-        GetObject((int)GameObjects.UserNameInputField).gameObject.GetComponentInChildren<TMP_InputField>().text = PlayerPrefs.GetString("UserName", "");
-        GetImage((int)Images.CharacterImage).sprite = Resources.Load<Sprite>("Sprites/InGame/" + PlayerPrefs.GetString("UserImg", "Jelly 0"));
+        GetObject((int)GameObjects.UserNameInputField).gameObject.GetComponentInChildren<TMP_InputField>().text = Managers.User.name;
+        GetImage((int)Images.CharacterImage).sprite = Resources.Load<Sprite>("Sprites/InGame/" + Managers.User.img);
 
         GetComponent<Canvas>().sortingOrder = 10;
         GetObject((int)GameObjects.UserNameInputField).BindEvent(() => { 
@@ -80,6 +80,10 @@ public class UI_SettingCharacter : UI_Popup
     {
         Managers.User.SetName(GetText((int)Texts.UserNameText).text);
         PlayerPrefs.SetString("UserName", Managers.User.name);
+        if (Managers.Scene.CurrentSceneType == Define.Scene.MainScene)
+        {
+            GameObject.Find("UI_Main").GetComponent<UI_Main>().RefreshUI();
+        }
         Managers.UI.ClosePopupUI(this);
     }
 

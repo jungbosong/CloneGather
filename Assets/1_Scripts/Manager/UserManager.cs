@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class UserManager
 {
-    public string name { get; set; }
-    public string img { get; set; }
+    public string name = PlayerPrefs.GetString("UserName", "");
+    public string img = PlayerPrefs.GetString("UserImg", "Jelly 0");
 
     public void SetName(string _name)
     {

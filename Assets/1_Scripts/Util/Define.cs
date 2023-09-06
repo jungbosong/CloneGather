@@ -16,7 +16,6 @@ public class Define
     {
         Unknown,
         MainScene,
-        LobbyScene,
     }
 
     public enum Sound
