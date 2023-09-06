@@ -1,0 +1,91 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UI_SettingCharacter : UI_Popup
+{
+    enum GameObjects
+    {
+        UserNameInputField,
+    }
+
+    enum Texts
+    {
+        UserNameText,
+    }
+
+    enum Images
+    {
+        CharacterImage,
+    }
+
+    enum Buttons
+    {
+        DoneButton,
+    }
+
+    void Start()
+    {
+        Init();
+    }
+
+    private void Update()
+    {
+        if (GetObject((int)GameObjects.UserNameInputField).gameObject.GetComponentInChildren<TMP_InputField>().text != "")
+        {
+            GetButton((int)Buttons.DoneButton).gameObject.SetActive(true);
+        }
+        else
+        {
+            GetButton((int)Buttons.DoneButton).gameObject.SetActive(false);
+        }
+    }
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        BindObject(typeof(GameObjects));
+        BindText(typeof(Texts));
+        BindImage(typeof(Images));
+        BindButton(typeof(Buttons));
+
+        GetObject((int)GameObjects.UserNameInputField).gameObject.GetComponentInChildren<TMP_InputField>().text = PlayerPrefs.GetString("UserName", "");
+        GetImage((int)Images.CharacterImage).sprite = Resources.Load<Sprite>("Sprites/InGame/" + PlayerPrefs.GetString("UserImg", "Jelly 0"));
+
+        GetComponent<Canvas>().sortingOrder = 10;
+        GetObject((int)GameObjects.UserNameInputField).BindEvent(() => { 
+            //Managers.Sound.Play("ClickBtnEff"); 
+        });
+        GetButton((int)Buttons.DoneButton).gameObject.BindEvent(() => {
+            //Managers.Sound.Play("ClickBtnEff"); 
+            OnClickedDoneButton();
+        });
+        GetImage((int)Images.CharacterImage).gameObject.BindEvent(() => {
+            //Managers.Sound.Play("ClickBtnEff"); 
+            OnClickedCharacterImg();
+        });
+
+
+        // Sound
+        //Managers.Sound.Play("");
+
+        return true;
+    }
+
+    void OnClickedDoneButton()
+    {
+        Managers.User.SetName(GetText((int)Texts.UserNameText).text);
+        PlayerPrefs.SetString("UserName", Managers.User.name);
+        Managers.UI.ClosePopupUI(this);
+    }
+
+    void OnClickedCharacterImg()
+    {
+        Managers.UI.ClosePopupUI(this);
+        Managers.UI.ShowPopupUI<UI_SettingImage>();
+    }
+}

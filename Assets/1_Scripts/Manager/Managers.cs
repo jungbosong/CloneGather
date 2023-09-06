@@ -16,16 +16,19 @@ public class Managers : MonoBehaviour
     private static SceneManagerEx s_SceneManager = new SceneManagerEx();
     private static SoundManager s_soundManager = new SoundManager();
     private static UserManager s_userManager = new UserManager();
+    private static JsonReader s_jsonReader = new JsonReader();
 
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
     public static UIManager UI { get { Init(); return s_uiManager; } }
     public static SceneManagerEx Scene { get { Init(); return s_SceneManager; } }
     public static SoundManager Sound { get { Init(); return s_soundManager; } }
     public static UserManager User { get { return s_userManager; } }
+    public static JsonReader JsonReader { get { return s_jsonReader; } }
 
     private void Start()
     {
         Init();
+        //PlayerPrefs.DeleteAll();
     }
 
     private static void Init()

@@ -20,6 +20,8 @@ public class UI_Main : UI_Scene
 
         BindText(typeof(Texts));
 
+        Managers.UI.ShowPopupUI<UI_SettingCharacter>();
+
         // Sound
         Managers.Sound.Clear();
         //Managers.Sound.Play("LobbyBgm", Define.Sound.Bgm);
