@@ -84,6 +84,10 @@ public class UI_SettingCharacter : UI_Popup
         {
             GameObject.Find("UI_Main").GetComponent<UI_Main>().RefreshUI();
         }
+        if (Managers.Scene.CurrentSceneType == Define.Scene.GameScene)
+        {
+            GameObject.Find("UI_Game").GetComponent<UI_Game>().SetOpnedSidePanel();
+        }
         Managers.UI.ClosePopupUI(this);
     }
 

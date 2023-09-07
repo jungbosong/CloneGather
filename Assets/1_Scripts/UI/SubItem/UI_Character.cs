@@ -28,7 +28,5 @@ public class UI_Character : UI_Base
     public void SetInfo(string img)
     {
         GetImage((int)Images.Image).sprite = Resources.Load<Sprite>("Sprites/InGame/" + img);
-        Debug.Log(img);
-        Debug.Log(Resources.Load<Sprite>("Sprites/InGame/" + img));
     }
 }

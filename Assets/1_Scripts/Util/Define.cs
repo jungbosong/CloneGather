@@ -16,6 +16,7 @@ public class Define
     {
         Unknown,
         MainScene,
+        GameScene,
     }
 
     public enum Sound
