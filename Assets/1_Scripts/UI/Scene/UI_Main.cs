@@ -51,6 +51,6 @@ public class UI_Main : UI_Scene
 
     void OnClickedEnterButton()
     {
-        Debug.Log("플레이어 입장");
+        Managers.Scene.ChangeScene(Define.Scene.GameScene);
     }
 }

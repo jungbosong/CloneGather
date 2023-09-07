@@ -87,6 +87,7 @@ public class UI_SettingCharacter : UI_Popup
         if (Managers.Scene.CurrentSceneType == Define.Scene.GameScene)
         {
             GameObject.Find("UI_Game").GetComponent<UI_Game>().SetOpnedSidePanel();
+            GameObject.Find("Player").GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/InGame/" + Managers.User.img);
         }
         Managers.UI.ClosePopupUI(this);
     }
